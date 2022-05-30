@@ -1,0 +1,21 @@
+title: Follina MSDT Attack Detection 
+id: d030cc7b-f4f1-47f5-a498-f746cf928018
+status: experimental
+description: Detects documents leveraging the "msdt.exe" binary to execute arbitrary commands
+author: Furkan Turan
+references:
+  - https://www.huntress.com/blog/microsoft-office-remote-code-execution-follina-msdt-bug
+date: 2022/05/30
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_parent:
+    ParentImage|endswith: 
+      - '\winword.exe'
+      - '\excel.exe'
+      - '\outlook.exe'
+    Image|endswith: '\msdt.exe'
+falsepositives:
+  - Unknown
+level: critical
